@@ -33,9 +33,6 @@ interface contactDeatilsTypes {
 }
 @Component
 export default class ContactDetails extends Vue {
-  mounted(): void {
-    console.log("ContactDetails", this.contactDeatils);
-  }
   @Prop() contactDeatils!: contactDeatilsTypes;
 }
 </script>
