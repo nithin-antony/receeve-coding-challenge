@@ -1,15 +1,15 @@
 <template>
   <div class="challenge">
-    <HomePage />
+    <Home />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import HomePage from "./pages/HomePage.vue";
+import Home from "./pages/Home.vue";
 
 @Component({
-  components: { HomePage },
+  components: { Home },
 })
 export default class App extends Vue {
   mounted(): void {

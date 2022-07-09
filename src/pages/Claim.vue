@@ -1,10 +1,16 @@
 <template>
-  <div class="claim-page">
-    <div class="contact-details">
-      <ContactDetails v-bind:contactDeatils="contactDeatils" />
-    </div>
-    <div class="claims-details">
-      <ClaimsDetails :claims="claims" />
+  <div>
+    <button class="btn">
+      <font-awesome-icon icon="angle-left" />{{ " " }}Back
+    </button>
+    <h1>Claim details</h1>
+    <div class="claim-page">
+      <div class="contact-details">
+        <ContactDetails v-bind:contactDeatils="contactDeatils" />
+      </div>
+      <div class="claims-details">
+        <ClaimsDetails :claims="claims" />
+      </div>
     </div>
   </div>
 </template>
@@ -17,7 +23,7 @@ import ClaimsDetails from "../components/ClaimsDetails.vue";
 @Component({
   components: { ContactDetails, ClaimsDetails },
 })
-export default class ClaimPage extends Vue {
+export default class Claim extends Vue {
   mounted(): void {
     console.log("let's go");
   }
@@ -99,5 +105,17 @@ export default class ClaimPage extends Vue {
 }
 .claims-details {
   grid-area: Claim;
+}
+
+.btn {
+  background-color: #fff;
+  border: none;
+  color: #205adf;
+  padding: 12px 16px 12px 0px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.btn:hover {
+  background-color: #e1e4ea;
 }
 </style>

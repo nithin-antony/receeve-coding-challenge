@@ -66,7 +66,7 @@
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator";
 @Component
-export default class Dashboard extends Vue {
+export default class AccountsDetails extends Vue {
   @Prop()
   msg!: string;
 }

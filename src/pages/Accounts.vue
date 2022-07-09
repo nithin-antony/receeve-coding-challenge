@@ -11,12 +11,12 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import NavigationBar from "@/components/NavigationBar.vue";
+import AccountsDetails from "@/components/AccountsDetails.vue";
 
 @Component({
-  components: { NavigationBar },
+  components: { AccountsDetails },
 })
-export default class HomePage extends Vue {
+export default class Accounts extends Vue {
   mounted(): void {
     console.log("let's go");
   }
