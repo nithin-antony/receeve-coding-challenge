@@ -53,7 +53,7 @@ export default class ClaimsDetails extends Vue {
 
 <style scoped>
 .claims-details {
-  width: 60%;
+  width: 90%;
   height: auto;
   border: 1px solid #27292e;
   border-radius: 5px;

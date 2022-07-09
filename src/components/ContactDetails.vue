@@ -16,7 +16,6 @@
         `${contactDeatils.city}, ${contactDeatils.state}, ${contactDeatils.zip}, ${contactDeatils.country} `
       }}</span>
     </div>
-    <div></div>
   </div>
 </template>
 
