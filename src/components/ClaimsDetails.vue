@@ -54,15 +54,17 @@ export default class ClaimsDetails extends Vue {
 <style scoped>
 .claims-details {
   width: 90%;
-  height: auto;
+  height: 400px;
   border: 1px solid #27292e;
   border-radius: 5px;
   padding: 20px;
+  overflow: auto;
 }
 
 #claims-table {
   border-collapse: collapse;
   width: 100%;
+  background: #fff;
 }
 
 #claims-table tr {
@@ -74,9 +76,13 @@ export default class ClaimsDetails extends Vue {
 }
 
 #claims-table th {
-  padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
   color: #27292e;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 10;
+  background: #fff;
 }
 </style>
