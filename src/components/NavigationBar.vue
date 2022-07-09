@@ -12,10 +12,10 @@
     <ul class="nav-list" style="overflow: visible;">
       <span v-for="(menuItem, index) in menuItems" :key="index">
         <li>
-          <a :href="menuItem.link">
+          <router-link :to="menuItem.link" exact-active-class="active">
             <span class="icon"><font-awesome-icon :icon="menuItem.icon"/></span>
             <span class="links_name">{{ menuItem.name }}</span>
-          </a>
+          </router-link>
           <span class="tooltip">{{ menuItem.tooltip || menuItem.name }}</span>
         </li>
       </span>
@@ -51,6 +51,9 @@ export default class NavigationBar extends Vue {
 </script>
 
 <style scoped>
+.active {
+  background-color: red;
+}
 .sidebar {
   position: relative;
   display: flex;
@@ -104,8 +107,6 @@ export default class NavigationBar extends Vue {
 }
 .sidebar .nav-list {
   padding: 0;
-}
-.sidebar .nav-list {
   margin-top: 20px;
 }
 .sidebar li {
@@ -151,7 +152,6 @@ export default class NavigationBar extends Vue {
 }
 
 .sidebar li a:hover {
-  /* background: #527fff; */
   background: #546cae;
 }
 .sidebar li a .links_name {

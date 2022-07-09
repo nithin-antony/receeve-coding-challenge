@@ -7,7 +7,7 @@ const routes: Array<RouteConfig> = [
   {
     path: "/",
     name: "dashboard",
-    component: () => import("../pages/Claim.vue"),
+    component: () => import("../pages/Dashboard.vue"),
   },
   {
     path: "/accounts",
