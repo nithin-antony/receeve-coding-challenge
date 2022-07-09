@@ -1,15 +1,17 @@
 <template>
   <div class="challenge">
-    <ClaimPage />
+    <!-- <ClaimPage /> -->
+    <NavigationBar />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import NavigationBar from "./components/NavigationBar.vue";
 import ClaimPage from "./pages/ClaimPage.vue";
 
 @Component({
-  components: { ClaimPage },
+  components: { ClaimPage, NavigationBar },
 })
 export default class App extends Vue {
   mounted(): void {

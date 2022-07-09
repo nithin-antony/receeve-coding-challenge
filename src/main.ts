@@ -5,10 +5,22 @@ import {
   faPhone,
   faEnvelope,
   faLocationPin,
+  faChartColumn,
+  faBars,
+  faReceipt,
+  faBarsStaggered,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-library.add(faPhone, faEnvelope, faLocationPin);
+library.add(
+  faPhone,
+  faEnvelope,
+  faLocationPin,
+  faChartColumn,
+  faBars,
+  faReceipt,
+  faBarsStaggered
+);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
 Vue.config.productionTip = false;
