@@ -11,6 +11,7 @@ import {
   faBarsStaggered,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import router from "./router";
 
 library.add(
   faPhone,
@@ -32,5 +33,6 @@ Vue.filter("capitalize", function(value: string) {
 });
 
 new Vue({
+  router,
   render: (h) => h(App),
 }).$mount("#app");

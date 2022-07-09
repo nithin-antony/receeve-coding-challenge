@@ -33,13 +33,13 @@ export default class NavigationBar extends Vue {
   isOpened = false;
   menuItems = [
     {
-      link: "#",
+      link: "/",
       name: "Dashboard",
       tooltip: "Dashboard",
       icon: "chart-column",
     },
     {
-      link: "#",
+      link: "/accounts",
       name: "Accounts",
       tooltip: "Accounts",
       icon: "receipt",
