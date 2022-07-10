@@ -16,7 +16,6 @@ export default class Accounts extends Vue {
   accounts = [];
   mounted() {
     getAllAccounts().then((response) => {
-      console.log(response);
       this.accounts = response;
     });
   }
