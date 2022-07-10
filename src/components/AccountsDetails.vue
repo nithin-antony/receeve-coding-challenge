@@ -1,12 +1,12 @@
 <template>
-  <div class="hello">
+  <div>
     <h1>Accounts</h1>
     <table id="custom-table">
       <tr>
         <th>Full Name</th>
         <th>Mobile Phone Number</th>
         <th>Email</th>
-        <th>Action</th>
+        <!-- <th>Action</th> -->
       </tr>
       <tr v-for="account in accounts" :key="account.id">
         <td>
@@ -16,20 +16,37 @@
         </td>
         <td>{{ account.debtor.mobilePhone }}</td>
         <td>{{ account.debtor.email }}</td>
-        <td><a @click="doSomething" class="link">address</a></td>
+        <!-- <td><a @click="viewAddressToggle()" class="link">address</a></td> -->
       </tr>
     </table>
   </div>
 </template>
 
 <script lang="ts">
+interface account {
+  id: string;
+  debtor: {
+    title: string;
+    firstName: string;
+    lastName: string;
+    address: {
+      address: string;
+      city: string;
+      state: string;
+      zip: number;
+      country: string;
+    };
+    mobilePhone: string;
+    email: string;
+  };
+}
 import { Component, Vue, Prop } from "vue-property-decorator";
 @Component
 export default class AccountsDetails extends Vue {
   @Prop()
   msg!: string;
 
-  accounts = [
+  accounts: account[] = [
     {
       id: "ff5f2424-0a46-444d-925c-d5bfb248e6f0",
       debtor: {
@@ -82,14 +99,9 @@ export default class AccountsDetails extends Vue {
       },
     },
   ];
-
-  generateFullName = (account: object) => {
+  generateFullName = (account: account) => {
     return `${account.debtor.title} ${account.debtor.firstName} ${account.debtor.lastName}`;
   };
-
-  doSomething() {
-    this.$router.push({ name: "dashboard" });
-  }
 
   claimDetails(id: string) {
     this.$router.push({ name: "claims-details", params: { id } });
@@ -123,7 +135,7 @@ export default class AccountsDetails extends Vue {
   cursor: pointer;
   font-weight: 500;
 }
-link:hover {
+.link:hover {
   text-decoration: underline;
 }
 </style>
