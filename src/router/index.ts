@@ -12,7 +12,7 @@ const routes: Array<RouteConfig> = [
   {
     path: "/accounts",
     name: "accounts-details",
-    component: () => import("../components/AccountsDetails.vue"),
+    component: () => import("../pages/Accounts.vue"),
   },
   {
     path: "/accounts/:id",

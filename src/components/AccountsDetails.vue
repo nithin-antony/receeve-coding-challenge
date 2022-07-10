@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Accounts</h1>
+    <h1 class="fixed-header">Accounts</h1>
     <table id="custom-table">
       <tr>
         <th>Full Name</th>
@@ -43,62 +43,8 @@ interface account {
 import { Component, Vue, Prop } from "vue-property-decorator";
 @Component
 export default class AccountsDetails extends Vue {
-  @Prop()
-  msg!: string;
+  @Prop({ default: Array }) readonly accounts!: account[];
 
-  accounts: account[] = [
-    {
-      id: "ff5f2424-0a46-444d-925c-d5bfb248e6f0",
-      debtor: {
-        title: "Ms.",
-        firstName: "Oliver",
-        lastName: "Mcmahon",
-        address: {
-          address: "396 Johnson Avenue, Rowe, Virgin Islands, 4670",
-          city: "Century",
-          state: "Missouri",
-          zip: 73208,
-          country: "Liechtenstein",
-        },
-        mobilePhone: "+1 (956) 531-2032",
-        email: "mcmahon.oliver@sureplex.name",
-      },
-    },
-    {
-      id: "45887367-1882-46fd-a5f0-8a60d60def18",
-      debtor: {
-        title: "Mr",
-        firstName: "Naomi",
-        lastName: "Cooper",
-        address: {
-          address: "962 Highland Place, Coyote, North Dakota, 6633",
-          city: "Wyano",
-          state: "Alabama",
-          zip: 31657,
-          country: "Liberia",
-        },
-        mobilePhone: "+1 (883) 600-2980",
-        email: "cooper.naomi@assistix.me",
-      },
-    },
-    {
-      id: "31acce96-4fc4-4da7-9345-5f3ba5fb00b8",
-      debtor: {
-        title: "Dr.",
-        firstName: "Koch",
-        lastName: "Guy",
-        address: {
-          address: "629 Engert Avenue, Wanamie, California, 3137",
-          city: "Fannett",
-          state: "Vermont",
-          zip: 70087,
-          country: "Hungary",
-        },
-        mobilePhone: "+1 (819) 553-2945",
-        email: "guy.koch@housedown.biz",
-      },
-    },
-  ];
   generateFullName = (account: account) => {
     return `${account.debtor.title} ${account.debtor.firstName} ${account.debtor.lastName}`;
   };
@@ -110,6 +56,13 @@ export default class AccountsDetails extends Vue {
 </script>
 
 <style scoped>
+.fixed-header {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 10;
+  background: #fff;
+}
 #custom-table {
   border-collapse: collapse;
   width: 100%;
@@ -128,6 +81,11 @@ export default class AccountsDetails extends Vue {
   padding-bottom: 12px;
   text-align: left;
   color: #27292e;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 40px;
+  z-index: 10;
+  background: #fff;
 }
 
 .link {

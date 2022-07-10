@@ -1,24 +1,24 @@
 <template>
-  <div class="home-page">
-    <div class="nav-bar">
-      <NavigationBar />
-    </div>
-    <div class="app-content">
-      <router-view />
-    </div>
+  <div>
+    <AccountsDetails :accounts="accounts" />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import AccountsDetails from "@/components/AccountsDetails.vue";
+import { getAllAccounts } from "../services/ClaimService";
 
 @Component({
   components: { AccountsDetails },
 })
 export default class Accounts extends Vue {
-  mounted(): void {
-    console.log("let's go");
+  accounts = [];
+  mounted() {
+    getAllAccounts().then((response) => {
+      console.log(response);
+      this.accounts = response;
+    });
   }
 }
 </script>
