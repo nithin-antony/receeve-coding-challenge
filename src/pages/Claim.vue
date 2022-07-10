@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button class="btn">
+    <button @click="accountDetails" class="btn">
       <font-awesome-icon icon="angle-left" />{{ " " }}Back
     </button>
     <h1>Claim details</h1>
@@ -26,6 +26,10 @@ import ClaimsDetails from "../components/ClaimsDetails.vue";
 export default class Claim extends Vue {
   mounted(): void {
     console.log("let's go");
+  }
+
+  accountDetails() {
+    this.$router.push({ name: "accounts-details" });
   }
   accountData = {
     id: "ff5f2424-0a46-444d-925c-d5bfb248e6f0",
