@@ -10,6 +10,8 @@ import {
   faReceipt,
   faBarsStaggered,
   faAngleLeft,
+  faArrowTrendDown,
+  faArrowTrendUp,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import router from "./router";
@@ -22,7 +24,9 @@ library.add(
   faBars,
   faReceipt,
   faBarsStaggered,
-  faAngleLeft
+  faAngleLeft,
+  faArrowTrendDown,
+  faArrowTrendUp
 );
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
