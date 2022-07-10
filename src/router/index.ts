@@ -16,8 +16,8 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: "/accounts/:id",
-    name: "claims-details",
-    component: () => import("../pages/Claim.vue"),
+    name: "account-details",
+    component: () => import("../pages/Account.vue"),
   },
 ];
 

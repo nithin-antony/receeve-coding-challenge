@@ -10,7 +10,7 @@
       </tr>
       <tr v-for="account in accounts" :key="account.id">
         <td>
-          <a @click="claimDetails(account.id)" class="link">{{
+          <a @click="accountDetails(account.id)" class="link">{{
             generateFullName(account)
           }}</a>
         </td>
@@ -46,11 +46,13 @@ export default class AccountsDetails extends Vue {
   @Prop({ default: Array }) readonly accounts!: account[];
 
   generateFullName = (account: account) => {
-    return `${account.debtor.title} ${account.debtor.firstName} ${account.debtor.lastName}`;
+    return `${account.debtor?.title ?? ""} ${account.debtor.firstName} ${
+      account.debtor.lastName
+    }`;
   };
 
-  claimDetails(id: string) {
-    this.$router.push({ name: "claims-details", params: { id } });
+  accountDetails(id: string) {
+    this.$router.push({ name: "account-details", params: { id } });
   }
 }
 </script>

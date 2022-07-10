@@ -1,5 +1,10 @@
 <template>
   <div class="claims-details">
+    <div class="header-content">
+      <h2 class="fixed-header">Claim details</h2>
+      <h4>Open claims({{ getOpenClaims() }})</h4>
+    </div>
+
     <table id="claims-table">
       <tr>
         <th>Due date</th>
@@ -36,29 +41,45 @@ interface claimsTypes {
 @Component({ components: { ClaimStatus } })
 export default class ClaimsDetails extends Vue {
   @Prop() claims!: claimsTypes[];
-  textToFormat: string = "Hello world";
-
-  capitalize(value: string) {
-    if (!value) return "";
-    value = value.toString();
-    return value.charAt(0).toLowerCase() + value.slice(1);
-  }
 
   formatCurrency = new Intl.NumberFormat("de-DE", {
     style: "currency",
     currency: "EUR",
   });
+
+  getOpenClaims() {
+    return this.claims.filter((claim) => claim.status === "OPEN").length;
+  }
 }
 </script>
 
 <style scoped>
 .claims-details {
+  background: #fff;
   width: 90%;
   height: 400px;
   border: 1px solid #27292e;
   border-radius: 5px;
   padding: 20px;
   overflow: auto;
+}
+
+.claims-details p {
+  color: #7a7a7a;
+  margin: 0;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header-content .fixed-header {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0px;
+  z-index: 10;
+  background: #fff;
 }
 
 #claims-table {
