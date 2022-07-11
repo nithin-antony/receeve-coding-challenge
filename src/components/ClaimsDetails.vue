@@ -12,7 +12,7 @@
           <th>Fees</th>
           <th>Status</th>
         </tr>
-        <tr v-for="claim in claims" :key="claim.id">
+        <tr v-for="claim in paginatedData" :key="claim.id">
           <td>{{ claim.dueDate }}</td>
           <td>{{ formatCurrency.format(claim.baseAmount / 100) }}</td>
           <td>{{ formatCurrency.format(claim.fees / 100) }}</td>
@@ -21,16 +21,23 @@
           </td>
         </tr>
       </table>
+
+      <Pagination
+        :data="claims"
+        :stepSize="stepSize"
+        @pageStart="getPaginatedData"
+      />
     </div>
     <h3 class="no-data" v-else>not found any data</h3>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator";
+import { Component, Vue, Prop, Watch } from "vue-property-decorator";
 import ClaimStatus from "./ClaimStatus.vue";
+import Pagination from "./Pagination.vue";
 
-interface claimsTypes {
+interface claimsType {
   id: string;
   accountId: string;
   currency: string;
@@ -40,9 +47,16 @@ interface claimsTypes {
   status: string;
   deletedAt?: string;
 }
-@Component({ components: { ClaimStatus } })
+@Component({ components: { ClaimStatus, Pagination } })
 export default class ClaimsDetails extends Vue {
-  @Prop() claims!: claimsTypes[];
+  @Prop({ default: Array }) readonly claims!: claimsType[];
+  stepSize: number = 5;
+  paginatedData: claimsType[] = [];
+
+  @Watch("claims")
+  onAccountsDataChanged() {
+    this.getPaginatedData(this.stepSize);
+  }
 
   formatCurrency = new Intl.NumberFormat("de-DE", {
     style: "currency",
@@ -51,6 +65,13 @@ export default class ClaimsDetails extends Vue {
 
   getOpenClaims() {
     return this.claims.filter((claim) => claim.status === "OPEN").length;
+  }
+
+  getPaginatedData(pageStart: number) {
+    this.paginatedData = this.claims.slice(
+      pageStart,
+      pageStart + this.stepSize
+    );
   }
 }
 </script>

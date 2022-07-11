@@ -21,11 +21,45 @@ import ContactDetails from "../components/ContactDetails.vue";
 import ClaimsDetails from "../components/ClaimsDetails.vue";
 import { getAllClaims, getAllAccounts } from "../services/ClaimService";
 
+interface account {
+  id: string;
+  debtor: {
+    title: string;
+    firstName: string;
+    lastName: string;
+    address: {
+      address: string;
+      city: string;
+      state: string;
+      zip: number;
+      country: string;
+    };
+    mobilePhone: string;
+    email: string;
+  };
+}
+
 @Component({
   components: { ContactDetails, ClaimsDetails },
 })
 export default class Claim extends Vue {
-  debtorDeatils = {};
+  debtorDeatils: account = {
+    id: "",
+    debtor: {
+      title: "",
+      firstName: "",
+      lastName: "",
+      address: {
+        address: "",
+        city: "",
+        state: "",
+        zip: 0,
+        country: "",
+      },
+      mobilePhone: "",
+      email: "",
+    },
+  };
   claims = [];
 
   mounted(): void {
@@ -59,7 +93,7 @@ export default class Claim extends Vue {
     this.$router.push({ name: "accounts-details" });
   }
 
-  generateFullName = (debtorDeatils) => {
+  generateFullName = (debtorDeatils: account) => {
     return `${debtorDeatils.debtor?.title ?? ""} ${
       debtorDeatils.debtor.firstName
     } ${debtorDeatils.debtor.lastName}`;
