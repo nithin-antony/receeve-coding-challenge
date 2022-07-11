@@ -1,7 +1,7 @@
 <template>
   <div class="home-page">
     <div class="nav-bar">
-      <NavigationBar />
+      <NavigationBar v-if="$router.currentRoute.name !== 'login'" />
     </div>
     <div class="app-content">
       <router-view />

@@ -4,23 +4,25 @@
       <h2 class="fixed-header">Claim details</h2>
       <h4>Open claims({{ getOpenClaims() }})</h4>
     </div>
-
-    <table id="claims-table">
-      <tr>
-        <th>Due date</th>
-        <th>Base amount</th>
-        <th>Fees</th>
-        <th>Status</th>
-      </tr>
-      <tr v-for="claim in claims" :key="claim.id">
-        <td>{{ claim.dueDate }}</td>
-        <td>{{ formatCurrency.format(claim.baseAmount / 100) }}</td>
-        <td>{{ formatCurrency.format(claim.fees / 100) }}</td>
-        <td>
-          <ClaimStatus :status="claim.status" />
-        </td>
-      </tr>
-    </table>
+    <div v-if="claims.length">
+      <table id="claims-table">
+        <tr>
+          <th>Due date</th>
+          <th>Base amount</th>
+          <th>Fees</th>
+          <th>Status</th>
+        </tr>
+        <tr v-for="claim in claims" :key="claim.id">
+          <td>{{ claim.dueDate }}</td>
+          <td>{{ formatCurrency.format(claim.baseAmount / 100) }}</td>
+          <td>{{ formatCurrency.format(claim.fees / 100) }}</td>
+          <td>
+            <ClaimStatus :status="claim.status" />
+          </td>
+        </tr>
+      </table>
+    </div>
+    <h3 class="no-data" v-else>not found any data</h3>
   </div>
 </template>
 
@@ -105,5 +107,9 @@ export default class ClaimsDetails extends Vue {
   top: 0;
   z-index: 10;
   background: #fff;
+}
+
+.no-data {
+  text-align: center;
 }
 </style>
