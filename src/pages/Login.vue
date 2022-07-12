@@ -155,7 +155,7 @@ export default class Login extends Vue {
 .login-card {
   width: 300px;
   height: 400px;
-  background-color: #ffffff;
+  background-color: #fff;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 10px #f4f8ff;
@@ -166,11 +166,11 @@ export default class Login extends Vue {
 }
 
 .form-group .is-invalid {
-  border: 2px solid red !important;
+  border: 2px solid #cf2e2e !important;
 }
 
 .form-group .invalid-feedback {
-  color: red;
+  color: #cf2e2e;
   font-size: 15px;
   font-weight: 500;
 }

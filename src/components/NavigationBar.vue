@@ -62,7 +62,7 @@ export default class NavigationBar extends Vue {
 
 <style scoped>
 .active {
-  background-color: red;
+  background-color: #007cba;
 }
 .sidebar {
   position: relative;
@@ -73,10 +73,8 @@ export default class NavigationBar extends Vue {
   top: 0;
   height: 100%;
   min-height: min-content;
-  /* overflow-y: auto; */
   width: 78px;
   background: #111e41;
-  /* padding: 6px 14px 0 14px; */
   z-index: 99;
   transition: all 0.5s ease;
 }
@@ -129,7 +127,7 @@ export default class NavigationBar extends Vue {
   top: -20px;
   left: calc(100% + 15px);
   z-index: 3;
-  background: yellow;
+  background: #007cba;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
   padding: 6px 12px;
   border-radius: 4px;
@@ -139,6 +137,7 @@ export default class NavigationBar extends Vue {
   white-space: nowrap;
   pointer-events: none;
   transition: 0s;
+  color: #fff;
 }
 .sidebar li:hover .tooltip {
   opacity: 1;
@@ -247,9 +246,9 @@ export default class NavigationBar extends Vue {
 }
 .sidebar.open .profile #log_out:hover {
   opacity: 1;
-  color: red;
+  color: #cf2e2e;
 }
 .sidebar .profile #log_out:hover {
-  color: red;
+  color: #cf2e2e;
 }
 </style>
