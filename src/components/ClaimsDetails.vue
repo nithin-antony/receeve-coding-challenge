@@ -34,24 +34,15 @@
 
 <script lang="ts">
 import { Component, Vue, Prop, Watch } from "vue-property-decorator";
+import { ClaimType } from "@/types";
 import ClaimStatus from "./ClaimStatus.vue";
 import Pagination from "./Pagination.vue";
 
-interface claimsType {
-  id: string;
-  accountId: string;
-  currency: string;
-  baseAmount: number;
-  fees: number;
-  dueDate: string;
-  status: string;
-  deletedAt?: string;
-}
 @Component({ components: { ClaimStatus, Pagination } })
 export default class ClaimsDetails extends Vue {
-  @Prop({ default: Array }) readonly claims!: claimsType[];
+  @Prop({ default: Array }) readonly claims!: ClaimType[];
   stepSize: number = 5;
-  paginatedData: claimsType[] = [];
+  paginatedData: ClaimType[] = [];
 
   @Watch("claims")
   onAccountsDataChanged() {

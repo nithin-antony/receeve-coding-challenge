@@ -35,38 +35,22 @@
 </template>
 
 <script lang="ts">
-interface account {
-  id: string;
-  debtor: {
-    title: string;
-    firstName: string;
-    lastName: string;
-    address: {
-      address: string;
-      city: string;
-      state: string;
-      zip: number;
-      country: string;
-    };
-    mobilePhone: string;
-    email: string;
-  };
-}
 import { Component, Vue, Prop, Watch } from "vue-property-decorator";
+import { AccountType } from "@/types";
 import Pagination from "./Pagination.vue";
 
 @Component({ components: { Pagination } })
 export default class AccountsDetails extends Vue {
-  @Prop({ default: Array }) readonly accounts!: account[];
+  @Prop({ default: Array }) readonly accounts!: AccountType[];
   stepSize: number = 10;
-  paginatedData: account[] = [];
+  paginatedData: AccountType[] = [];
 
   @Watch("accounts")
   onAccountsDataChanged() {
     this.getPaginatedData(this.stepSize);
   }
 
-  generateFullName = (account: account) => {
+  generateFullName = (account: AccountType) => {
     return `${account.debtor?.title ?? ""} ${account.debtor?.firstName ?? ""} ${
       account.debtor.lastName
     }`;

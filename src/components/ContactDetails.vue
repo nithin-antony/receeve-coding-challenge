@@ -3,18 +3,18 @@
     <h3>Contact details</h3>
     <p>
       <span class="icon"><font-awesome-icon icon="phone"/></span>
-      <span>{{ contactDeatils.mobilePhone }}</span>
+      <span>{{ contactDeatils.debtor.mobilePhone }}</span>
     </p>
     <p>
       <span class="icon"><font-awesome-icon icon="envelope"/></span>
-      <span>{{ contactDeatils.email }}</span>
+      <span>{{ contactDeatils.debtor.email }}</span>
     </p>
     <div class="address-block">
       <span class="icon"><font-awesome-icon icon="location-pin"/></span>
       <span class="address"
-        >{{ contactDeatils.address }}{{ " , " }}
+        >{{ contactDeatils.debtor.address.address }}{{ " , " }}
         {{
-          `${contactDeatils.city}, ${contactDeatils.state}, ${contactDeatils.zip}, ${contactDeatils.country} `
+          `${contactDeatils.debtor.address.city}, ${contactDeatils.debtor.address.state}, ${contactDeatils.debtor.address.zip}, ${contactDeatils.debtor.address.country} `
         }}</span
       >
     </div>
@@ -23,18 +23,13 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator";
-interface contactDeatilsTypes {
-  address: string;
-  city: string;
-  state: string;
-  zip: number;
-  country: string;
-  mobilePhone: string;
-  email: string;
-}
+import { AccountType } from "@/types";
 @Component
 export default class ContactDetails extends Vue {
-  @Prop() contactDeatils!: contactDeatilsTypes;
+  @Prop() contactDeatils!: AccountType;
+  mounted(): void {
+    console.log("let's go", this.contactDeatils);
+  }
 }
 </script>
 

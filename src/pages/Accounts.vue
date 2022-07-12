@@ -1,34 +1,20 @@
 <template>
   <div>
-    <AccountsDetails :accounts="accounts" />
+    <AccountsDetails :accounts="getAllAccounts" />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import { Getter } from "vuex-class";
 import AccountsDetails from "@/components/AccountsDetails.vue";
-import { getAllAccounts } from "../services/ClaimService";
+import { AccountType } from "@/types";
 
 @Component({
   components: { AccountsDetails },
 })
 export default class Accounts extends Vue {
-  accounts = [];
-  mounted() {
-    getAllAccounts().then((response) => {
-      const sortedAccounts = response.sort((a, b) => {
-        console.log(a.debtor.firstName);
-        if (a.debtor.firstName < b.debtor.firstName) {
-          return -1;
-        }
-        if (a.debtor.firstName > b.debtor.firstName) {
-          return 1;
-        }
-        return 0;
-      });
-      this.accounts = sortedAccounts;
-    });
-  }
+  @Getter getAllAccounts!: AccountType[];
 }
 </script>
 

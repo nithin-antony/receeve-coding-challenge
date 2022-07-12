@@ -10,16 +10,21 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
+import { Getter } from "vuex-class";
 import Card from "../components/Card.vue";
 import ChartDoughnut from "../components/charts/ChartDoughnut.vue";
+import { AccountType } from "@/types";
 
 @Component({
   components: { Card, ChartDoughnut },
 })
 export default class Dashboard extends Vue {
-  @Prop()
-  msg!: string;
+  @Getter getAllAccounts!: AccountType;
+
+  mounted(): void {
+    console.log(this.getAllAccounts);
+  }
 }
 </script>
 
