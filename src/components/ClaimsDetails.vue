@@ -1,18 +1,18 @@
 <template>
   <div class="claims-details">
-    <div class="header-content">
+    <div class="claims-header-content">
       <h2 class="fixed-header">Claim details</h2>
       <h4>Open claims({{ getOpenClaims() }})</h4>
     </div>
-    <div v-if="claims.length">
+    <div v-if="claims.length" class="claims-table-container">
       <table id="claims-table">
-        <tr>
+        <tr class="table_row-header">
           <th>Due date</th>
           <th>Base amount</th>
           <th>Fees</th>
           <th>Status</th>
         </tr>
-        <tr v-for="claim in paginatedData" :key="claim.id">
+        <tr v-for="claim in paginatedData" :key="claim.id" class="table_row">
           <td>{{ claim.dueDate }}</td>
           <td>{{ formatCurrency.format(claim.baseAmount / 100) }}</td>
           <td>{{ formatCurrency.format(claim.fees / 100) }}</td>
@@ -70,11 +70,10 @@ export default class ClaimsDetails extends Vue {
 <style scoped>
 .claims-details {
   background: #fff;
-  width: 90%;
+  width: 95%;
   height: 400px;
-  border: 1px solid #27292e;
-  border-radius: 5px;
-  padding: 20px;
+  border: 1px solid #d9d9d9;
+  border-radius: 3px;
   overflow: auto;
 }
 
@@ -83,17 +82,28 @@ export default class ClaimsDetails extends Vue {
   margin: 0;
 }
 
-.header-content {
+.claims-header-content {
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-bottom: 1px solid #d9d9d9;
+  padding: 5px;
+  background-color: #fafafa;
+  font-weight: bold;
 }
-.header-content .fixed-header {
+
+.claims-header-content .fixed-header {
   position: sticky;
   position: -webkit-sticky;
   top: 0px;
   z-index: 10;
   background: #fff;
+}
+
+.claims-table-container {
+  padding-top: 10px;
+  padding: 10px;
 }
 
 #claims-table {
@@ -102,8 +112,11 @@ export default class ClaimsDetails extends Vue {
   background: #fff;
 }
 
-#claims-table tr {
-  border-bottom: 1px solid #27292e;
+.table_row-header {
+  border-bottom: 1px solid #d0d7de;
+}
+.table_row {
+  border-bottom: 1px dotted #d0d7de;
 }
 
 #claims-table td {
@@ -119,6 +132,8 @@ export default class ClaimsDetails extends Vue {
   top: 0;
   z-index: 10;
   background: #fff;
+  width: 25%;
+  text-transform: uppercase;
 }
 
 .no-data {

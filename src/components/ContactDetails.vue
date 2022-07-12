@@ -34,16 +34,17 @@ export default class ContactDetails extends Vue {
 </script>
 
 <style scoped>
-.address-block {
-  display: flex;
-}
-
 .contact-details {
   padding: 15px 10px;
   width: 350px;
   height: auto;
-  border: 1px solid #27292e;
+  border: 1px solid #d0d7de;
   border-radius: 5px;
+  background-color: #fafafa;
+}
+
+.address-block {
+  display: flex;
 }
 
 p {
@@ -51,6 +52,7 @@ p {
 }
 .icon {
   padding-right: 10px;
+  color: #205adf;
 }
 
 .address {

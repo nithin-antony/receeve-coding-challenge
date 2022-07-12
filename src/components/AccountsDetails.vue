@@ -1,36 +1,34 @@
 <template>
   <div>
     <h1 class="fixed-header">Accounts</h1>
-    <div class="accounts-details">
-      <table id="custom-table">
-        <tr>
-          <th>
-            Full Name
-            <!-- <span class="icon"><font-awesome-icon icon="sort-up"/></span>
+    <table id="custom-table">
+      <tr class="table_row-header">
+        <th>
+          Full Name
+          <!-- <span class="icon"><font-awesome-icon icon="sort-up"/></span>
             <span class="icon"><font-awesome-icon icon="sort-down" /></span> -->
-          </th>
-          <th>Mobile Phone Number</th>
-          <th>Email</th>
-          <!-- <th>Action</th> -->
-        </tr>
-        <tr v-for="account in paginatedData" :key="account.id">
-          <td>
-            <a @click="accountDetails(account.id)" class="link">{{
-              generateFullName(account)
-            }}</a>
-          </td>
-          <td>{{ account.debtor.mobilePhone }}</td>
-          <td>{{ account.debtor.email }}</td>
-          <!-- <td><a @click="viewAddressToggle()" class="link">address</a></td> -->
-        </tr>
-      </table>
+        </th>
+        <th>Mobile Phone Number</th>
+        <th>Email</th>
+        <th>Country</th>
+      </tr>
+      <tr v-for="account in paginatedData" :key="account.id" class="table_row">
+        <td>
+          <a @click="accountDetails(account.id)" class="link">{{
+            generateFullName(account)
+          }}</a>
+        </td>
+        <td>{{ account.debtor.mobilePhone }}</td>
+        <td>{{ account.debtor.email }}</td>
+        <td>{{ account.debtor.address.country }}</td>
+      </tr>
+    </table>
 
-      <Pagination
-        :data="accounts"
-        :stepSize="stepSize"
-        @pageStart="getPaginatedData"
-      />
-    </div>
+    <Pagination
+      :data="accounts"
+      :stepSize="stepSize"
+      @pageStart="getPaginatedData"
+    />
   </div>
 </template>
 
@@ -70,15 +68,6 @@ export default class AccountsDetails extends Vue {
 </script>
 
 <style scoped>
-.accounts-details {
-  background: #fff;
-  width: 90%;
-  height: auto;
-  border: 1px solid #27292e;
-  border-radius: 5px;
-  padding: 20px;
-  overflow: auto;
-}
 .fixed-header {
   position: sticky;
   position: -webkit-sticky;
@@ -89,10 +78,16 @@ export default class AccountsDetails extends Vue {
 #custom-table {
   border-collapse: collapse;
   width: 100%;
+  background: #fff;
 }
 
-#custom-table tr {
-  border-bottom: 1px solid #27292e;
+.table_row-header {
+  border-top: 1px solid #d0d7de;
+  border-bottom: 1px solid #d0d7de;
+  margin-top: 5px;
+}
+.table_row {
+  border-bottom: 1px dotted #d0d7de;
 }
 
 #custom-table td {
@@ -100,7 +95,7 @@ export default class AccountsDetails extends Vue {
 }
 
 #custom-table th {
-  padding-bottom: 12px;
+  padding: 12px 0px;
   text-align: left;
   color: #27292e;
   position: sticky;
@@ -108,6 +103,8 @@ export default class AccountsDetails extends Vue {
   top: 40px;
   z-index: 10;
   background: #fff;
+  width: 25%;
+  text-transform: uppercase;
 }
 
 .link {

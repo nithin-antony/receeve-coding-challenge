@@ -24,6 +24,11 @@ const routes: Array<RouteConfig> = [
     name: "login",
     component: () => import("../pages/Login.vue"),
   },
+  {
+    path: "/:catchAll(.*)*",
+    name: "PageNotFound",
+    component: () => import("../pages/PageNotFound.vue"),
+  },
 ];
 
 const router = new VueRouter({
