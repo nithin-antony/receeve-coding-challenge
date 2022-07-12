@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="accountDetails" class="btn">
+    <button @click="moveToAccountDetails" class="btn">
       <font-awesome-icon icon="angle-left" />{{ " " }}Accounts
     </button>
     <div class="account-header">
@@ -12,7 +12,7 @@
 
     <div class="claim-page">
       <div class="contact-details">
-        <ContactDetails v-bind:contactDeatils="getAccountDetails" />
+        <ContactDetails :contactDeatils="getAccountDetails" />
       </div>
       <div class="claims-details">
         <ClaimsDetails :claims="getCliamForAccount" />
@@ -22,9 +22,9 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
 import { ActionContext } from "vuex";
-import { Getter, Action } from "vuex-class";
+import { Getter, Action, State } from "vuex-class";
 import ContactDetails from "../components/ContactDetails.vue";
 import ClaimsDetails from "../components/ClaimsDetails.vue";
 import { StateType, ClaimType, AccountType } from "@/types";
@@ -33,16 +33,28 @@ import { StateType, ClaimType, AccountType } from "@/types";
   components: { ContactDetails, ClaimsDetails },
 })
 export default class Claim extends Vue {
+  @State((state) => state.accounts) accountsState: AccountType;
   @Getter getAccountDetails!: AccountType;
   @Getter getCliamForAccount!: ClaimType[];
   @Action accountDetailsById!: ActionContext<StateType, StateType>;
+  @Action fethAllAccounts!: ActionContext<StateType, StateType>;
+  @Action fethAllClaims!: ActionContext<StateType, StateType>;
+  accountId: string = this.$route.params.id;
 
   mounted(): void {
-    const accountId = this.$route.params.id;
-    this.accountDetailsById(accountId);
+    if (!Object.prototype.hasOwnProperty.call(this.getAccountDetails, "id")) {
+      this.fethAllClaims();
+      this.fethAllAccounts();
+    }
+    this.accountDetailsById(this.accountId);
   }
 
-  accountDetails() {
+  @Watch("accountsState", { immediate: true, deep: true })
+  onAccountsStateChanged() {
+    this.accountDetailsById(this.accountId);
+  }
+
+  moveToAccountDetails() {
     this.$router.push({ name: "accounts-details" });
   }
 
@@ -58,9 +70,8 @@ export default class Claim extends Vue {
   }
 
   generateFullName = (account: AccountType) => {
-    return `${account.debtor?.title ?? ""} ${account.debtor?.firstName ?? ""} ${
-      account.debtor.lastName
-    }`;
+    return `${account.debtor?.title ?? ""} ${account.debtor?.firstName ??
+      ""} ${account.debtor?.lastName ?? ""}`;
   };
 }
 </script>

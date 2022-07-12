@@ -1,9 +1,9 @@
 <template>
-  <div class="contact-details">
+  <div v-if="contactDeatils.id" class="contact-details">
     <h3>Contact details</h3>
     <p>
       <span class="icon"><font-awesome-icon icon="phone"/></span>
-      <span>{{ contactDeatils.debtor.mobilePhone }}</span>
+      <span>{{ contactDeatils.debtor.mobilePhone || "" }}</span>
     </p>
     <p>
       <span class="icon"><font-awesome-icon icon="envelope"/></span>
@@ -27,20 +27,20 @@ import { AccountType } from "@/types";
 @Component
 export default class ContactDetails extends Vue {
   @Prop() contactDeatils!: AccountType;
-  mounted(): void {
-    console.log("let's go", this.contactDeatils);
-  }
 }
 </script>
 
 <style scoped>
 .contact-details {
-  padding: 15px 10px;
+  padding: 0 10px 10px 15px;
   width: 350px;
   height: auto;
   border: 1px solid #d0d7de;
   border-radius: 5px;
   background-color: #fafafa;
+}
+.contact-details h3 {
+  margin-top: 7px;
 }
 
 .address-block {
