@@ -3,7 +3,13 @@
     <button @click="accountDetails" class="btn">
       <font-awesome-icon icon="angle-left" />{{ " " }}Accounts
     </button>
-    <h1>{{ generateFullName(debtorDeatils) }}</h1>
+    <div class="account-header">
+      <h1>{{ generateFullName(debtorDeatils) }}</h1>
+      <button @click="coppyToClipboard" class="btn">
+        Share {{ " " }}<font-awesome-icon icon="share-from-square" />
+      </button>
+    </div>
+
     <div class="claim-page">
       <div class="contact-details">
         <ContactDetails v-bind:contactDeatils="debtorDeatils" />
@@ -93,6 +99,16 @@ export default class Claim extends Vue {
     this.$router.push({ name: "accounts-details" });
   }
 
+  async coppyToClipboard() {
+    try {
+      await navigator.clipboard.writeText(
+        window.location.origin + this.$router.currentRoute.fullPath
+      );
+      alert("Copied");
+    } catch ($e) {
+      alert("Cannot copy");
+    }
+  }
   generateFullName = (debtorDeatils: account) => {
     return `${debtorDeatils.debtor?.title ?? ""} ${
       debtorDeatils.debtor.firstName
@@ -102,6 +118,16 @@ export default class Claim extends Vue {
 </script>
 
 <style scoped>
+.account-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 50px;
+}
+
+.account-header .icon {
+  color: #205adf;
+}
 .claim-page {
   display: grid;
   grid-template-columns: 1fr 4fr;

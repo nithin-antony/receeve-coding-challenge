@@ -15,6 +15,10 @@ import {
   faAngleRight,
   faAnglesLeft,
   faAnglesRight,
+  faSortUp,
+  faSortDown,
+  faShareFromSquare,
+  faArrowRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import router from "./router";
@@ -32,7 +36,11 @@ library.add(
   faAngleLeft,
   faAngleRight,
   faAnglesLeft,
-  faAnglesRight
+  faAnglesRight,
+  faSortUp,
+  faSortDown,
+  faShareFromSquare,
+  faArrowRightFromBracket
 );
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 

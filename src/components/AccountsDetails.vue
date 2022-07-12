@@ -4,7 +4,11 @@
     <div class="accounts-details">
       <table id="custom-table">
         <tr>
-          <th>Full Name</th>
+          <th>
+            Full Name
+            <!-- <span class="icon"><font-awesome-icon icon="sort-up"/></span>
+            <span class="icon"><font-awesome-icon icon="sort-down" /></span> -->
+          </th>
           <th>Mobile Phone Number</th>
           <th>Email</th>
           <!-- <th>Action</th> -->

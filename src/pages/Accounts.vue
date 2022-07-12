@@ -16,7 +16,17 @@ export default class Accounts extends Vue {
   accounts = [];
   mounted() {
     getAllAccounts().then((response) => {
-      this.accounts = response;
+      const sortedAccounts = response.sort((a, b) => {
+        console.log(a.debtor.firstName);
+        if (a.debtor.firstName < b.debtor.firstName) {
+          return -1;
+        }
+        if (a.debtor.firstName > b.debtor.firstName) {
+          return 1;
+        }
+        return 0;
+      });
+      this.accounts = sortedAccounts;
     });
   }
 }

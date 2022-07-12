@@ -20,6 +20,14 @@
         </li>
       </span>
     </ul>
+    <div v-if="isLoggedIn" class="profile">
+      <div class="profile-details">
+        <h4>{{ profileName }}</h4>
+      </div>
+      <span class="icon" id="log_out"
+        ><font-awesome-icon icon="arrow-right-from-bracket"
+      /></span>
+    </div>
   </div>
 </template>
 
@@ -31,6 +39,8 @@ export default class NavigationBar extends Vue {
   msg!: string;
 
   isOpened = false;
+  isLoggedIn = true;
+  profileName = "Nithin";
   menuItems = [
     {
       link: "/",
@@ -119,7 +129,7 @@ export default class NavigationBar extends Vue {
   top: -20px;
   left: calc(100% + 15px);
   z-index: 3;
-  background: var(--items-tooltip-color);
+  background: yellow;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
   padding: 6px 12px;
   border-radius: 4px;
@@ -196,5 +206,50 @@ export default class NavigationBar extends Vue {
   font-size: 20px;
   text-align: center;
   line-height: 60px;
+}
+.sidebar div.profile {
+  position: fixed;
+  bottom: 0;
+  height: 60px;
+  width: 78px;
+  background: #007aff;
+  transition: all 0.5s ease;
+  overflow: hidden;
+}
+.sidebar.open div.profile {
+  width: 250px;
+}
+.sidebar div .profile-details {
+  font-size: 15px;
+  font-weight: 400;
+  color: #fff;
+  white-space: nowrap;
+}
+.sidebar .profile #log_out {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background: #007aff;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  border-radius: 0px;
+  transition: all 0.5s ease;
+}
+.sidebar.open .profile #log_out {
+  width: 50px;
+  background: #007aff;
+  opacity: 1;
+}
+.sidebar.open .profile:hover #log_out {
+  opacity: 1;
+}
+.sidebar.open .profile #log_out:hover {
+  opacity: 1;
+  color: red;
+}
+.sidebar .profile #log_out:hover {
+  color: red;
 }
 </style>
