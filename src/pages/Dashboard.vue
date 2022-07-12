@@ -30,9 +30,16 @@ export default class Dashboard extends Vue {
 
 <style scoped>
 .dashboard .card-statics {
+  height: 200px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  align-items: center;
   flex-wrap: wrap;
-  flex: 0 0 33.333333%;
+  background-color: rgb(15, 23, 36);
+  border-radius: 16px;
+}
+
+.dashboard .card-statics:hover {
+  background-color: rgb(17, 28, 46);
 }
 </style>

@@ -29,6 +29,7 @@ export default new Vuex.Store({
       },
     },
     userName: "",
+    dashboardData: [],
   },
   getters: {
     getAllAccounts(state: StateType): AccountType[] {

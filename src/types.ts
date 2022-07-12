@@ -4,6 +4,7 @@ export interface StateType {
   accountClaims: ClaimType[];
   accountDetails: AccountType;
   userName: string;
+  dashboardData: any;
 }
 
 export interface AccountType {

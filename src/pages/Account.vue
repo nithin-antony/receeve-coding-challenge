@@ -25,9 +25,12 @@
 import { Component, Vue, Watch } from "vue-property-decorator";
 import { ActionContext } from "vuex";
 import { Getter, Action, State } from "vuex-class";
+import VueToast from "vue-toast-notification";
+import "vue-toast-notification/dist/theme-sugar.css";
 import ContactDetails from "../components/ContactDetails.vue";
 import ClaimsDetails from "../components/ClaimsDetails.vue";
 import { StateType, ClaimType, AccountType } from "@/types";
+Vue.use(VueToast);
 
 @Component({
   components: { ContactDetails, ClaimsDetails },
@@ -63,7 +66,10 @@ export default class Claim extends Vue {
       await navigator.clipboard.writeText(
         window.location.origin + this.$router.currentRoute.fullPath
       );
-      alert("Copied");
+      Vue.$toast.open({
+        message: "Copied to clipboard!",
+        position: "top-right",
+      });
     } catch ($e) {
       alert("Cannot copy");
     }
