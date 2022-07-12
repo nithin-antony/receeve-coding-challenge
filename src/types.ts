@@ -3,6 +3,7 @@ export interface StateType {
   claims: ClaimType[];
   accountClaims: ClaimType[];
   accountDetails: AccountType;
+  userName: string;
 }
 
 export interface AccountType {

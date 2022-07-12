@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex, { ActionContext } from "vuex";
 import { StateType, AccountType, ClaimType } from "@/types";
 import { getAllAccounts, getAllClaims } from "../services/ClaimService";
+import { logout } from "../services/AuthService";
 
 Vue.use(Vuex);
 
@@ -27,6 +28,7 @@ export default new Vuex.Store({
         email: "",
       },
     },
+    userName: "",
   },
   getters: {
     getAllAccounts(state: StateType): AccountType[] {
@@ -56,7 +58,7 @@ export default new Vuex.Store({
         (claim: ClaimType) => claim.accountId === accountId
       );
 
-      const sortedClaims = accountClaims.sort((a, b) => {
+      const sortedClaims = accountClaims.sort((a: ClaimType, b: ClaimType) => {
         return new Date(b.dueDate) - new Date(a.dueDate);
       });
       const accountData = state.accounts.filter(
@@ -67,6 +69,10 @@ export default new Vuex.Store({
 
       state.accountClaims = sortedClaims;
       state.accountDetails = contactDeatils;
+    },
+
+    userlogout(state: StateType) {
+      state.userName = "";
     },
   },
   actions: {
@@ -94,12 +100,22 @@ export default new Vuex.Store({
         console.log(error);
       }
     },
+
     accountDetailsById(
       ctx: ActionContext<StateType, StateType>,
       accountId: string
     ): void {
       ctx.commit("setAccountDetails", accountId);
     },
+
+    async logoutUser(ctx: ActionContext<StateType, StateType>) {
+      try {
+        await logout();
+        ctx.commit("userlogout");
+      } catch (error) {
+        alert(error);
+        console.log(error);
+      }
+    },
   },
-  modules: {},
 });

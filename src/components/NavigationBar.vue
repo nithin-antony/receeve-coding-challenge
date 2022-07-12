@@ -24,22 +24,35 @@
       <div class="profile-details">
         <h4>{{ profileName }}</h4>
       </div>
-      <span class="icon" id="log_out"
+      <span class="icon" id="log_out" @click="showModal"
         ><font-awesome-icon icon="arrow-right-from-bracket"
       /></span>
     </div>
+    <Modal
+      v-if="isModalVisible"
+      header="Do you want to logout?"
+      @onClose="closeModal"
+      @onOk="handleLogout"
+      okButton="true"
+      closeButton="true"
+    />
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator";
-@Component
-export default class NavigationBar extends Vue {
-  @Prop()
-  msg!: string;
+import { Component, Vue } from "vue-property-decorator";
+import { ActionContext } from "vuex";
+import { Action } from "vuex-class";
+import Modal from "./Modal.vue";
+import { StateType } from "@/types";
 
-  isOpened = false;
-  isLoggedIn = true;
+@Component({ components: { Modal } })
+export default class NavigationBar extends Vue {
+  @Action logoutUser!: ActionContext<StateType, StateType>;
+  isOpened: boolean = false;
+  isLoggedIn: boolean = true;
+  isModalVisible: boolean = false;
+  profileImg: string = require("../assets/logo.png");
   profileName = "Nithin";
   menuItems = [
     {
@@ -56,7 +69,18 @@ export default class NavigationBar extends Vue {
     },
   ];
 
-  profileImg: string = require("../assets/logo.png");
+  showModal() {
+    this.isModalVisible = true;
+  }
+  closeModal() {
+    this.isModalVisible = false;
+  }
+
+  handleLogout() {
+    this.closeModal();
+    this.logoutUser();
+    this.$router.push({ name: "login" });
+  }
 }
 </script>
 
@@ -127,7 +151,7 @@ export default class NavigationBar extends Vue {
   top: -20px;
   left: calc(100% + 15px);
   z-index: 3;
-  background: #007cba;
+  background: #48c2c2;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
   padding: 6px 12px;
   border-radius: 4px;
@@ -247,8 +271,10 @@ export default class NavigationBar extends Vue {
 .sidebar.open .profile #log_out:hover {
   opacity: 1;
   color: #cf2e2e;
+  cursor: pointer;
 }
 .sidebar .profile #log_out:hover {
   color: #cf2e2e;
+  cursor: pointer;
 }
 </style>

@@ -14,23 +14,13 @@
     "allowJs": true,
     "baseUrl": ".",
     "resolveJsonModule": true,
-    "types": [
-      "webpack-env",
-      "node",
-      "jest"
-    ],
+    "strictPropertyInitialization": false,
+    "types": ["webpack-env", "node", "jest"],
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": ["src/*"]
     },
     "outDir": "dist",
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable",
-      "scripthost"
-    ],
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
     "skipLibCheck": true,
     "noResolve": false,
     "forceConsistentCasingInFileNames": false
@@ -44,8 +34,5 @@
     "tests/**/*.tsx",
     "src/mockServer.js"
   ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "exclude": ["node_modules", "dist"]
 }

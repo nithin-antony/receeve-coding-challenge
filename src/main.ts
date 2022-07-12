@@ -22,6 +22,7 @@ import {
   faSortDown,
   faShareFromSquare,
   faArrowRightFromBracket,
+  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -41,7 +42,8 @@ library.add(
   faSortUp,
   faSortDown,
   faShareFromSquare,
-  faArrowRightFromBracket
+  faArrowRightFromBracket,
+  faXmark
 );
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
