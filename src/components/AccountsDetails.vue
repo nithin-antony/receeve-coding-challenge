@@ -33,12 +33,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, Watch } from "vue-property-decorator";
+import { Prop, Watch } from "vue-property-decorator";
+import { Component, Mixins } from "vue-mixin-decorator";
 import { AccountType } from "@/types";
+import { AppMixins } from "../mixins/AppMixins";
 import Pagination from "./Pagination.vue";
 
 @Component({ components: { Pagination } })
-export default class AccountsDetails extends Vue {
+export default class AccountsDetails extends Mixins(AppMixins) {
   @Prop({ default: Array }) readonly accounts!: AccountType[];
   stepSize: number = 10;
   paginatedData: AccountType[] = [];
@@ -47,12 +49,6 @@ export default class AccountsDetails extends Vue {
   onAccountsDataChanged() {
     this.getPaginatedData(this.stepSize);
   }
-
-  generateFullName = (account: AccountType) => {
-    return `${account.debtor?.title ?? ""} ${account.debtor?.firstName ?? ""} ${
-      account.debtor.lastName
-    }`;
-  };
 
   accountDetails(id: string) {
     this.$router.push({ name: "account-details", params: { id } });

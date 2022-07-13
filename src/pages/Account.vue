@@ -22,19 +22,21 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from "vue-property-decorator";
+import { Vue, Watch } from "vue-property-decorator";
+import { Component, Mixins } from "vue-mixin-decorator";
 import { Getter, Action, State } from "vuex-class";
 import VueToast from "vue-toast-notification";
 import "vue-toast-notification/dist/theme-sugar.css";
 import ContactDetails from "../components/ContactDetails.vue";
 import ClaimsDetails from "../components/ClaimsDetails.vue";
+import { AppMixins } from "../mixins/AppMixins";
 import { ClaimType, AccountType } from "@/types";
 Vue.use(VueToast);
 
 @Component({
   components: { ContactDetails, ClaimsDetails },
 })
-export default class Claim extends Vue {
+export default class Claim extends Mixins(AppMixins) {
   @State((state) => state.accounts) accountsState: AccountType;
   @Getter getAccountDetails!: AccountType;
   @Getter getCliamForAccount!: ClaimType[];
@@ -74,11 +76,6 @@ export default class Claim extends Vue {
       alert("Cannot copy");
     }
   }
-
-  generateFullName = (account: AccountType) => {
-    return `${account.debtor?.title ?? ""} ${account.debtor?.firstName ??
-      ""} ${account.debtor?.lastName ?? ""}`;
-  };
 }
 </script>
 

@@ -2,7 +2,7 @@
   <div class="info-card">
     <div class="title">{{ cardTitle }}</div>
     <div class="content">
-      <span>{{ formatCurrency.format(totalAmount / 100) }}</span>
+      <span>{{ formatCurrency(totalAmount) }}</span>
       <span class="statics-info">
         <span :class="upTrend ? 'icon-up' : 'icon-down'"
           ><font-awesome-icon
@@ -16,20 +16,16 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator";
+import { Prop } from "vue-property-decorator";
+import { Component, Mixins } from "vue-mixin-decorator";
+import { AppMixins } from "../mixins/AppMixins";
+
 @Component
-export default class Card extends Vue {
+export default class Card extends Mixins(AppMixins) {
   @Prop({ default: "Card header" }) readonly cardTitle!: string;
   @Prop({ default: 78900 }) readonly totalAmount!: number;
   @Prop({ default: 67800 }) readonly totalClaims!: number;
   @Prop({ default: true }) readonly upTrend!: boolean;
-
-  formatCurrency = new Intl.NumberFormat("de-DE", {
-    style: "currency",
-    currency: "EUR",
-  });
-
-  formatNumber = new Intl.NumberFormat("de-DE");
 }
 </script>
 
