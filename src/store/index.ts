@@ -3,6 +3,7 @@ import Vuex, { ActionContext } from "vuex";
 import { StateType, AccountType, ClaimType } from "@/types";
 import { getAllAccounts, getAllClaims } from "../services/ClaimService";
 import { logout } from "../services/AuthService";
+import { CURRENCY_UNIT } from "../utils/Constants";
 
 Vue.use(Vuex);
 
@@ -80,7 +81,6 @@ export default new Vuex.Store({
     },
 
     setDashboard(state: StateType, data: ClaimType[]) {
-      const CENTS: number = 100;
       const getSum = (data: ClaimType[], key: string) => {
         return data.reduce(
           (previousValue: number, currentValue: any) =>
@@ -102,19 +102,19 @@ export default new Vuex.Store({
 
       const claimnsOpen = {
         title: "Active claims",
-        totalAmount: getSum(openClaims, "baseAmount") / CENTS,
+        totalAmount: getSum(openClaims, "baseAmount") / CURRENCY_UNIT,
         totalClaims: openClaims.length,
         upTrend: true,
       };
       const claimnsDeleted = {
         title: "Deleted claims",
-        totalAmount: getSum(deletedClaims, "baseAmount") / CENTS,
+        totalAmount: getSum(deletedClaims, "baseAmount") / CURRENCY_UNIT,
         totalClaims: deletedClaims.length,
         upTrend: false,
       };
       const claimnsPaid = {
         title: "Completed claims",
-        totalAmount: getSum(completedClaims, "baseAmount") / CENTS,
+        totalAmount: getSum(completedClaims, "baseAmount") / CURRENCY_UNIT,
         totalClaims: completedClaims.length,
         upTrend: true,
       };

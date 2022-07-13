@@ -1,6 +1,7 @@
 import Vue from "vue";
 import { Mixin } from "vue-mixin-decorator";
 import { AccountType } from "@/types";
+import { CURRENCY_UNIT } from "../utils/Constants";
 
 @Mixin
 export class AppMixins extends Vue {
@@ -16,7 +17,7 @@ export class AppMixins extends Vue {
       currency: "EUR",
     });
 
-    return formatter.format(data / 100);
+    return formatter.format(data / CURRENCY_UNIT);
   };
 
   formatNumber = new Intl.NumberFormat("de-DE");
