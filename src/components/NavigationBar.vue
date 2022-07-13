@@ -53,7 +53,7 @@ export default class NavigationBar extends Vue {
   isLoggedIn: boolean = true;
   isModalVisible: boolean = false;
   profileImg: string = require("../assets/logo.png");
-  profileName = "Nithin";
+  profileName = "Nithin Antony";
   menuItems = [
     {
       link: "/",
@@ -243,10 +243,15 @@ export default class NavigationBar extends Vue {
   width: 250px;
 }
 .sidebar div .profile-details {
-  font-size: 15px;
-  font-weight: 400;
+  font-size: 20px;
+  font-weight: 600;
   color: #fff;
   white-space: nowrap;
+  margin-left: 20px;
+}
+
+.profile-details h4 {
+  margin-top: 18px;
 }
 .sidebar .profile #log_out {
   position: absolute;

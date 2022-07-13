@@ -27,13 +27,20 @@ ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale);
 })
 export default class ChartDoughnut extends Vue {
   @Prop()
-  msg!: string;
+  data!: object;
   chartData = {
-    labels: ["VueJs", "EmberJs", "ReactJs", "AngularJs"],
+    labels: this.data[0].lables,
     datasets: [
       {
-        backgroundColor: ["#41B883", "#E46651", "#00D8FF", "#DD1B16"],
-        data: [40, 20, 80, 10],
+        backgroundColor: [
+          "rgba(255, 99, 132)",
+          "rgba(54, 162, 235)",
+          "rgba(255, 206, 86)",
+          "rgba(75, 192, 192)",
+          "rgba(153, 102, 255)",
+          "rgba(255, 159, 64)",
+        ],
+        data: this.data[0].data,
       },
     ],
   };

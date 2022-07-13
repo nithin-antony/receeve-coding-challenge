@@ -44,6 +44,9 @@ export default new Vuex.Store({
     getCliamForAccount(state: StateType): ClaimType[] {
       return state.accountClaims;
     },
+    getDashboard(state: StateType): any[] {
+      return state.dashboardData;
+    },
   },
   mutations: {
     setAccounts(state: StateType, data: AccountType[]): void {
@@ -74,6 +77,61 @@ export default new Vuex.Store({
 
     userlogout(state: StateType) {
       state.userName = "";
+    },
+
+    setDashboard(state: StateType, data: ClaimType[]) {
+      const getSum = (data: Array, key: string) => {
+        return data.reduce(
+          (previousValue: number, currentValue: any) =>
+            previousValue + currentValue[key],
+          0
+        );
+      };
+
+      const openClaims = data.filter(
+        (claim: ClaimType) => claim.status === "OPEN"
+      );
+      const completedClaims = data.filter(
+        (claim: ClaimType) => claim.status === "PAID"
+      );
+
+      const deletedClaims = data.filter(
+        (claim: ClaimType) => claim.status === "DELETED"
+      );
+
+      const claimnsOpen = {
+        title: "Active claims",
+        totalAmount: getSum(openClaims, "baseAmount") / 100,
+        totalClaims: openClaims.length,
+        upTrend: true,
+      };
+      const claimnsDeleted = {
+        title: "Deleted claims",
+        totalAmount: getSum(deletedClaims, "baseAmount") / 100,
+        totalClaims: deletedClaims.length,
+        upTrend: false,
+      };
+      const claimnsPaid = {
+        title: "Completed claims",
+        totalAmount: getSum(completedClaims, "baseAmount") / 100,
+        totalClaims: completedClaims.length,
+        upTrend: true,
+      };
+      const chartData = [
+        {
+          lables: ["Open", "Paid", "Deleted"],
+          data: [
+            openClaims.length,
+            completedClaims.length,
+            deletedClaims.length,
+          ],
+        },
+      ];
+
+      state.dashboardData = {
+        cardData: [claimnsOpen, claimnsDeleted, claimnsPaid],
+        chartData: [chartData],
+      };
     },
   },
   actions: {
@@ -113,6 +171,16 @@ export default new Vuex.Store({
       try {
         await logout();
         ctx.commit("userlogout");
+      } catch (error) {
+        alert(error);
+        console.log(error);
+      }
+    },
+
+    async fethDashoardData(ctx: ActionContext<StateType, StateType>) {
+      try {
+        const data = await getAllClaims();
+        ctx.commit("setDashboard", data);
       } catch (error) {
         alert(error);
         console.log(error);

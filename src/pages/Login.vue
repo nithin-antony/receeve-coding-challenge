@@ -35,10 +35,10 @@
             Login
           </button>
         </div>
+        <div v-show="loginError" class="invalid-feedback">
+          Invalid username or password
+        </div>
       </form>
-      <div v-show="loginError" class="invalid-feedback">
-        Invalid username or password
-      </div>
     </div>
   </div>
 </template>
@@ -96,7 +96,7 @@ export default class Login extends Vue {
 .login-page {
   width: 100%;
   height: 100%;
-  background-color: #27292e;
+  background-image: linear-gradient(to right, #27292e, #302b63);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -149,7 +149,7 @@ export default class Login extends Vue {
 }
 
 .login-page button:disabled {
-  background: grey;
+  background: rgb(46, 96, 255, 0.6);
 }
 
 .login-card {
@@ -170,6 +170,11 @@ export default class Login extends Vue {
 }
 
 .form-group .invalid-feedback {
+  color: #cf2e2e;
+  font-size: 15px;
+  font-weight: 500;
+}
+.invalid-feedback {
   color: #cf2e2e;
   font-size: 15px;
   font-weight: 500;

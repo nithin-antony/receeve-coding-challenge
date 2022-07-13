@@ -113,6 +113,10 @@ export default class Modal extends Vue {
   background: transparent;
 }
 
+.btn-close:hover {
+  color: #cf2e2e;
+}
+
 .modal .btn {
   height: 35px;
   width: 100px;

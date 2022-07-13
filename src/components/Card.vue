@@ -35,7 +35,7 @@ export default class Card extends Vue {
 
 <style scoped>
 .info-card {
-  width: 320px;
+  width: 340px;
   height: 100px;
   background-color: rgb(9, 15, 25);
   color: rgb(198, 211, 231);
