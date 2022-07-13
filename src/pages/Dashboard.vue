@@ -30,18 +30,16 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { Getter, Action } from "vuex-class";
-import { ActionContext } from "vuex";
 import Card from "../components/Card.vue";
 import ChartDoughnut from "../components/charts/ChartDoughnut.vue";
 import ChartLine from "../components/charts/ChartLine.vue";
-import { StateType } from "@/types";
 
 @Component({
   components: { Card, ChartDoughnut, ChartLine },
 })
 export default class Dashboard extends Vue {
   @Getter getDashboard!: any;
-  @Action fethDashoardData!: ActionContext<StateType, StateType>;
+  @Action fethDashoardData!: () => void;
 
   mounted(): void {
     this.fethDashoardData();

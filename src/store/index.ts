@@ -63,7 +63,7 @@ export default new Vuex.Store({
       );
 
       const sortedClaims = accountClaims.sort((a: ClaimType, b: ClaimType) => {
-        return new Date(b.dueDate) - new Date(a.dueDate);
+        return new Date(b.dueDate).valueOf() - new Date(a.dueDate).valueOf();
       });
       const accountData = state.accounts.filter(
         (account: AccountType) => account.id === accountId
@@ -80,7 +80,7 @@ export default new Vuex.Store({
     },
 
     setDashboard(state: StateType, data: ClaimType[]) {
-      const getSum = (data: Array, key: string) => {
+      const getSum = (data: ClaimType[], key: string) => {
         return data.reduce(
           (previousValue: number, currentValue: any) =>
             previousValue + currentValue[key],

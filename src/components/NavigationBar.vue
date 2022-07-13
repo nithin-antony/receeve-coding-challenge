@@ -41,14 +41,12 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { ActionContext } from "vuex";
 import { Action } from "vuex-class";
 import Modal from "./Modal.vue";
-import { StateType } from "@/types";
 
 @Component({ components: { Modal } })
 export default class NavigationBar extends Vue {
-  @Action logoutUser!: ActionContext<StateType, StateType>;
+  @Action logoutUser!: () => void;
   isOpened: boolean = false;
   isLoggedIn: boolean = true;
   isModalVisible: boolean = false;

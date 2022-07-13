@@ -36,3 +36,8 @@ export interface ClaimType {
   deletedAt?: string;
   paidAt?: string;
 }
+
+export interface ChartDataType {
+  lables: Array<string>;
+  data: Array<number>;
+}

@@ -23,13 +23,12 @@
 
 <script lang="ts">
 import { Component, Vue, Watch } from "vue-property-decorator";
-import { ActionContext } from "vuex";
 import { Getter, Action, State } from "vuex-class";
 import VueToast from "vue-toast-notification";
 import "vue-toast-notification/dist/theme-sugar.css";
 import ContactDetails from "../components/ContactDetails.vue";
 import ClaimsDetails from "../components/ClaimsDetails.vue";
-import { StateType, ClaimType, AccountType } from "@/types";
+import { ClaimType, AccountType } from "@/types";
 Vue.use(VueToast);
 
 @Component({
@@ -39,9 +38,10 @@ export default class Claim extends Vue {
   @State((state) => state.accounts) accountsState: AccountType;
   @Getter getAccountDetails!: AccountType;
   @Getter getCliamForAccount!: ClaimType[];
-  @Action accountDetailsById!: ActionContext<StateType, StateType>;
-  @Action fethAllAccounts!: ActionContext<StateType, StateType>;
-  @Action fethAllClaims!: ActionContext<StateType, StateType>;
+  // eslint-disable-next-line no-unused-vars
+  @Action accountDetailsById!: (id: string) => void;
+  @Action fethAllAccounts!: () => void;
+  @Action fethAllClaims!: () => void;
   accountId: string = this.$route.params.id;
 
   mounted(): void {

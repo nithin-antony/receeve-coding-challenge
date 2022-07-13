@@ -6,17 +6,15 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { ActionContext } from "vuex";
 import { Action } from "vuex-class";
 import Home from "./pages/Home.vue";
-import { StateType } from "@/types";
 
 @Component({
   components: { Home },
 })
 export default class App extends Vue {
-  @Action fethAllAccounts!: ActionContext<StateType, StateType>;
-  @Action fethAllClaims!: ActionContext<StateType, StateType>;
+  @Action fethAllAccounts!: () => void;
+  @Action fethAllClaims!: () => void;
   mounted(): void {
     this.fethAllAccounts();
     this.fethAllClaims();

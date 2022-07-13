@@ -11,6 +11,7 @@
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator";
 import { Doughnut } from "vue-chartjs/legacy";
+import { ChartDataType } from "@/types";
 import {
   Chart as ChartJS,
   Title,
@@ -27,7 +28,7 @@ ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale);
 })
 export default class ChartDoughnut extends Vue {
   @Prop()
-  data!: object;
+  data!: Array<ChartDataType>;
   chartData = {
     labels: this.data[0].lables,
     datasets: [
