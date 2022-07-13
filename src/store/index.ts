@@ -80,6 +80,7 @@ export default new Vuex.Store({
     },
 
     setDashboard(state: StateType, data: ClaimType[]) {
+      const CENTS: number = 100;
       const getSum = (data: ClaimType[], key: string) => {
         return data.reduce(
           (previousValue: number, currentValue: any) =>
@@ -101,24 +102,24 @@ export default new Vuex.Store({
 
       const claimnsOpen = {
         title: "Active claims",
-        totalAmount: getSum(openClaims, "baseAmount") / 100,
+        totalAmount: getSum(openClaims, "baseAmount") / CENTS,
         totalClaims: openClaims.length,
         upTrend: true,
       };
       const claimnsDeleted = {
         title: "Deleted claims",
-        totalAmount: getSum(deletedClaims, "baseAmount") / 100,
+        totalAmount: getSum(deletedClaims, "baseAmount") / CENTS,
         totalClaims: deletedClaims.length,
         upTrend: false,
       };
       const claimnsPaid = {
         title: "Completed claims",
-        totalAmount: getSum(completedClaims, "baseAmount") / 100,
+        totalAmount: getSum(completedClaims, "baseAmount") / CENTS,
         totalClaims: completedClaims.length,
         upTrend: true,
       };
-      const chartData = [
-        {
+      const chartData = {
+        doughnutChart: {
           lables: ["Open", "Paid", "Deleted"],
           data: [
             openClaims.length,
@@ -126,11 +127,12 @@ export default new Vuex.Store({
             deletedClaims.length,
           ],
         },
-      ];
+        lineChart: {},
+      };
 
       state.dashboardData = {
         cardData: [claimnsOpen, claimnsDeleted, claimnsPaid],
-        chartData: [chartData],
+        chartData: chartData,
       };
     },
   },

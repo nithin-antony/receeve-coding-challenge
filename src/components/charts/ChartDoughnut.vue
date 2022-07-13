@@ -28,9 +28,9 @@ ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale);
 })
 export default class ChartDoughnut extends Vue {
   @Prop()
-  data!: Array<ChartDataType>;
+  chartDatas!: ChartDataType;
   chartData = {
-    labels: this.data[0].lables,
+    labels: this.chartDatas.lables,
     datasets: [
       {
         backgroundColor: [
@@ -41,7 +41,7 @@ export default class ChartDoughnut extends Vue {
           "rgba(153, 102, 255)",
           "rgba(255, 159, 64)",
         ],
-        data: this.data[0].data,
+        data: this.chartDatas.data,
       },
     ],
   };

@@ -20,7 +20,7 @@
         Claim statics
       </h2>
       <div class="chart-area-2">
-        <ChartDoughnut :data="getDashboard.chartData[0]" />
+        <ChartDoughnut :chartDatas="getDashboard.chartData.doughnutChart" />
         <ChartLine />
       </div>
     </div>
