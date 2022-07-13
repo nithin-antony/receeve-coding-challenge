@@ -31,7 +31,11 @@
           </div>
         </div>
         <div class="form-group">
-          <button @click="handleSubmit" :disabled="isLoggingIn">
+          <button
+            @click="handleSubmit"
+            :disabled="isLoggingIn"
+            class="qa-submit-btn"
+          >
             Login
           </button>
         </div>
