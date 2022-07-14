@@ -16,7 +16,7 @@
             :class="submitted && !userName ? 'is-invalid' : ''"
           />
           <div v-show="submitted && !userName" class="invalid-feedback">
-            Username is required
+            Username is required or incorrect format
           </div>
         </div>
         <div class="form-group">
@@ -30,7 +30,7 @@
             :class="submitted && !password ? 'is-invalid' : ''"
           />
           <div v-show="submitted && !password" class="invalid-feedback">
-            Password is required
+            Password is required or incorrect format
           </div>
         </div>
         <div class="form-group">
@@ -66,11 +66,11 @@ export default class Login extends Vue {
   logoImg: string = require("../assets/logo.png");
 
   updateUserName($event: { target: { value: string } }) {
-    this.userName = $event.target.value;
+    this.userName = $event.target.value.trim();
   }
 
   updatePassword($event: { target: { value: string } }) {
-    this.password = $event.target.value;
+    this.password = $event.target.value.trim();
   }
 
   handleSubmit() {
