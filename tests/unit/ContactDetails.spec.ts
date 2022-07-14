@@ -1,7 +1,14 @@
-import { shallowMount } from "@vue/test-utils";
+import { shallowMount, Wrapper } from "@vue/test-utils";
+import Vue from "vue";
 import ContactDetails from "@/components/ContactDetails.vue";
 
 describe("ContactDetails component", () => {
+  let wrapper: Wrapper<Vue>;
+  beforeEach(() => {
+    wrapper = shallowMount(ContactDetails, {
+      propsData: { contactDeatils },
+    });
+  });
   const contactDeatils = {
     id: "abc-577-dhhh",
     debtor: {
@@ -20,16 +27,10 @@ describe("ContactDetails component", () => {
     },
   };
   it("ContactDetails should a vue instance", () => {
-    const wrapper = shallowMount(ContactDetails, {
-      propsData: { contactDeatils },
-    });
     expect(wrapper.isVueInstance).toBeTruthy();
   });
 
   it("Renders mobile phone number when props passed", () => {
-    const wrapper = shallowMount(ContactDetails, {
-      propsData: { contactDeatils },
-    });
     expect(wrapper.text()).toMatch(contactDeatils.debtor.mobilePhone);
   });
 

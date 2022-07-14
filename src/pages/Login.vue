@@ -10,6 +10,7 @@
           <label for="username">Username</label>
           <input
             type="text"
+            name="username"
             :value="userName"
             @input="updateUserName($event)"
             :class="submitted && !userName ? 'is-invalid' : ''"
@@ -22,8 +23,10 @@
           <label htmlFor="password">Password</label>
           <input
             type="password"
+            name="password"
             :value="password"
             @input="updatePassword($event)"
+            class="qa-password"
             :class="submitted && !password ? 'is-invalid' : ''"
           />
           <div v-show="submitted && !password" class="invalid-feedback">

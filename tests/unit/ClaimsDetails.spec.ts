@@ -1,7 +1,14 @@
-import { shallowMount } from "@vue/test-utils";
+import { shallowMount, Wrapper } from "@vue/test-utils";
+import Vue from "vue";
 import ClaimsDetails from "@/components/ClaimsDetails.vue";
 
 describe("ClaimsDetails component", () => {
+  let wrapper: Wrapper<Vue>;
+  beforeEach(() => {
+    wrapper = shallowMount(ClaimsDetails, {
+      propsData: { claims },
+    });
+  });
   const claims = [
     {
       id: "4b5b0de4",
@@ -25,16 +32,10 @@ describe("ClaimsDetails component", () => {
   ];
 
   it("ClaimsDetails should a vue instance", () => {
-    const wrapper = shallowMount(ClaimsDetails, {
-      propsData: { claims },
-    });
     expect(wrapper.isVueInstance).toBeTruthy();
   });
 
   it("Should renders ClaimsDetails when props passed", () => {
-    const wrapper = shallowMount(ClaimsDetails, {
-      propsData: { claims },
-    });
     expect(wrapper.find(".claims-table-container").exists()).toBe(true);
   });
 
