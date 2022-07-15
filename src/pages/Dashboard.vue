@@ -21,7 +21,7 @@
       </h2>
       <div class="chart-area-2">
         <ChartDoughnut :chartDatas="getDashboard.chartData.doughnutChart" />
-        <ChartLine />
+        <ChartLine :chartDatas="getDashboard.chartData.lineChart" />
       </div>
     </div>
   </div>
@@ -43,6 +43,7 @@ export default class Dashboard extends Vue {
 
   mounted(): void {
     this.fethDashoardData();
+    console.log(this.getDashboard);
   }
 }
 </script>

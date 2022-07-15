@@ -89,16 +89,60 @@ export default new Vuex.Store({
         );
       };
 
-      const openClaims = data.filter(
-        (claim: ClaimType) => claim.status === "OPEN"
-      );
-      const completedClaims = data.filter(
-        (claim: ClaimType) => claim.status === "PAID"
-      );
+      const filterClaimsByStatus = (data: Array<ClaimType>, status: string) => {
+        return data.filter((claim: ClaimType) => claim.status === status);
+      };
+      const filterClaimsByDates = (
+        data: Array<ClaimType>,
+        startDate: string,
+        endDate: string,
+        key: string
+      ) => {
+        return data.filter((claim: any) => {
+          return (
+            new Date(claim[key]).valueOf() >= new Date(startDate).valueOf() &&
+            new Date(claim[key]).valueOf() <= new Date(endDate).valueOf()
+          );
+        });
+      };
 
-      const deletedClaims = data.filter(
-        (claim: ClaimType) => claim.status === "DELETED"
-      );
+      const openClaims = filterClaimsByStatus(data, "OPEN");
+      const completedClaims = filterClaimsByStatus(data, "PAID");
+      const deletedClaims = filterClaimsByStatus(data, "DELETED");
+      const dateConfig = [
+        { startDate: "2020-03-01", endDate: "2020-03-31" },
+        { startDate: "2020-04-01", endDate: "2020-04-30" },
+        { startDate: "2020-05-01", endDate: "2020-05-31" },
+        { startDate: "2020-06-01", endDate: "2020-06-30" },
+        { startDate: "2020-07-01", endDate: "2020-07-31" },
+      ];
+
+      const paidDataForChart = dateConfig.map((config) => {
+        return filterClaimsByDates(
+          data,
+          config.startDate,
+          config.endDate,
+          "paidAt"
+        ).length;
+      });
+
+      const activeDataForChart = dateConfig.map((config) => {
+        return filterClaimsByDates(
+          data,
+          config.startDate,
+          config.endDate,
+          "dueDate"
+        ).length;
+      });
+
+      const deletedDataForChart = dateConfig.map((config) => {
+        return filterClaimsByDates(
+          data,
+          config.startDate,
+          config.endDate,
+          "deletedAt"
+        ).length;
+      });
 
       const claimnsOpen = {
         title: "Active claims",
@@ -120,19 +164,38 @@ export default new Vuex.Store({
       };
       const chartData = {
         doughnutChart: {
-          lables: ["Open", "Paid", "Deleted"],
+          labels: ["Open", "Paid", "Deleted"],
           data: [
             openClaims.length,
             completedClaims.length,
             deletedClaims.length,
           ],
         },
-        lineChart: {},
+        lineChart: {
+          labels: ["March", "April", "May", "June", "July"],
+          data: [
+            {
+              label: "Paid",
+              backgroundColor: "rgba(255, 159, 64)",
+              data: paidDataForChart,
+            },
+            {
+              label: "Active",
+              backgroundColor: "rgba(153, 102, 255)",
+              data: activeDataForChart,
+            },
+            {
+              label: "Completed",
+              backgroundColor: "rgba(75, 192, 192)",
+              data: deletedDataForChart,
+            },
+          ],
+        },
       };
 
       state.dashboardData = {
         cardData: [claimnsOpen, claimnsDeleted, claimnsPaid],
-        chartData: chartData,
+        chartData,
       };
     },
   },

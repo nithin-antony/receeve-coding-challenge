@@ -38,6 +38,6 @@ export interface ClaimType {
 }
 
 export interface ChartDataType {
-  lables: Array<string>;
+  labels: Array<string>;
   data: Array<number>;
 }

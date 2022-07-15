@@ -1,11 +1,12 @@
 <template>
-  <div>
+  <div class="chart">
     <Doughnut
       :chart-options="chartOptions"
       :chart-data="chartData"
       :width="width"
       :height="height"
     />
+    <h2>claims by status</h2>
   </div>
 </template>
 <script lang="ts">
@@ -30,7 +31,7 @@ export default class ChartDoughnut extends Vue {
   @Prop()
   chartDatas!: ChartDataType;
   chartData = {
-    labels: this.chartDatas.lables,
+    labels: this.chartDatas.labels,
     datasets: [
       {
         backgroundColor: [
@@ -55,3 +56,9 @@ export default class ChartDoughnut extends Vue {
   };
 }
 </script>
+
+<style scoped>
+.chart h2 {
+  text-align: center;
+}
+</style>

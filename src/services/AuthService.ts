@@ -1,7 +1,10 @@
 const fakeLogin = (ms: number, userName: string, password: string) => {
   return new Promise((resolve, reject) =>
     setTimeout(() => {
-      if (password === "receeve@2022") {
+      if (
+        password === "receeve@2022" &&
+        (userName === "REC456" || userName === "REC556")
+      ) {
         localStorage.setItem("user", JSON.stringify(userName));
         resolve({ autnticated: true });
       } else {
